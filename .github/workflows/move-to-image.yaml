@@ -1,21 +1,21 @@
 name: Push to GHCR after pages build and deployment
 
-on:
-  workflow_run:
-    workflows: 
-    - "pages build and deployment"
-    - "Build"
-    types: [completed]
-    branches:
-    - "gh-pages"  
+#on:
+#  workflow_run:
+#    workflows: 
+#    - "pages build and deployment"
+#    - "Build"
+#    types: [completed]
+#    branches:
+#    - "gh-pages"  
 
 #Ten ok
-#on:
-#  push:
-#    branches-ignore:
-#      - 'gh-pages'
-#permissions:
-#  contents: write
+on:
+  push:
+    branches:
+      - 'gh-pages'
+permissions:
+  contents: write
 
 jobs:
   push-to-ghcr:
