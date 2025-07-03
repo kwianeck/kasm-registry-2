@@ -1,0 +1,66 @@
+name: Push to GHCR after pages build and deployment
+
+on:
+  workflow_run:
+    workflows: ["pages build and deployment"]
+    types: [completed]
+    branches:
+    - "gh-pages"  
+
+#Ten ok
+#on:
+#  push:
+#    branches-ignore:
+#      - 'gh-pages'
+#permissions:
+#  contents: write
+
+jobs:
+  push-to-ghcr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout workflows branch (Dockerfile)
+        uses: actions/checkout@v4
+        with:
+          ref: workflows
+
+      - name: Checkout gh-pages branch (site content)
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get latest numeric tag from GHCR
+        id: get_tag
+        run: |
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          REPO="kasm-registry-server"
+
+          TAGS=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://ghcr.io/v2/${OWNER}/${REPO}/tags/list" | jq -r '.tags[]' || echo "")
+
+          LAST=$(echo "$TAGS" | grep -E '^[0-9]+$' | sort -n | tail -n 1)
+          if [ -z "$LAST" ]; then LAST=0; fi
+          NEXT=$((LAST + 1))
+          echo "last_tag=$LAST" >> $GITHUB_OUTPUT
+          echo "next_tag=$NEXT" >> $GITHUB_OUTPUT
+
+      - name: Build and push Docker image
+        run: |
+          IMAGE=ghcr.io/${{ github.repository_owner }}/kasm-registry-server
+          TAG=${{ steps.get_tag.outputs.next_tag }}
+
+          docker build -f Dockerfile -t $IMAGE:$TAG -t $IMAGE:latest gh-pages
+          docker push $IMAGE:$TAG
+          docker push $IMAGE:latest
