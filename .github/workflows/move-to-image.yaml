@@ -19,7 +19,7 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout workflows branch (Dockerfile)
+      - name: Checkout 1.1 branch (Dockerfile)
         uses: actions/checkout@v4
         with:
           ref: "1.1"
