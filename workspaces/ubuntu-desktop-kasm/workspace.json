@@ -1,7 +1,7 @@
 {
-  "description": "Chromium is a free and open-source browser, primarily developed and maintained by Google.",
-  "docker_registry": "https://index.docker.io/v1/",
-  "image_src": "chromium.png",
+  "description": "Custom Ubuntu Noble Deskop - moj test",
+  "docker_registry": "https://ghcr.io/",
+  "image_src": "ubuntu.png",
   "run_config": {
     "hostname": "kasm"
   },
@@ -14,9 +14,9 @@
     }
   },
   "categories": [
-    "Browser"
+    "Desktop"
   ],
-  "friendly_name": "Chromium2",
+  "friendly_name": "ubuntu-desktop-kasm",
   "architecture": [
     "amd64",
     "arm64"
@@ -24,10 +24,11 @@
   "compatibility": [
     {
       "version": "1.16.x",
-      "image": "kasmweb/chromium:develop",
-      "uncompressed_size_mb": 2170,
+      "image": "ghcr.io/kwianeck/kasm-custom/ubuntu-desktop-kasm:1.0.1",
+      "uncompressed_size_mb": 1095,
       "available_tags": [
-        "develop"
+        "develop",
+        "prod"
       ]
     }
   ]
