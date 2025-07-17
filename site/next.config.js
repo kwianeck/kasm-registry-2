@@ -7,7 +7,7 @@ const nextConfig = {
     name: 'Private KASM Registry',
     description: 'Private registry with KASM workspaces.',
     icon: '/img/logo.svg',
-    listUrl: 'https://kasm-registry.wianeck.com/',
+    listUrl: 'http://kasm-registry/',
     contactUrl: 'https://github.com/kwianeck89',
   },
   reactStrictMode: true,
