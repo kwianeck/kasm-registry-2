@@ -24,7 +24,7 @@
   "compatibility": [
     {
       "version": "1.17.x",
-      "image": "docker pull ghcr.io/kwianeck/kasm-custom/ubuntu-desktop-custom:1.0.0",
+      "image": "ghcr.io/kwianeck/kasm-custom/ubuntu-desktop-custom:1.0.0",
       "uncompressed_size_mb": 1304,
       "available_tags": [
         "1.0.0",
