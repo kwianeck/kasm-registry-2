@@ -1,0 +1,36 @@
+{
+  "description": "Custom Ubuntu Noble Deskop - new",
+  "docker_registry": "https://ghcr.io/",
+  "image_src": "ubuntu.png",
+  "run_config": {
+    "hostname": "kasm"
+  },
+  "exec_config": {
+    "go": {
+      "cmd": "bash -c '/dockerstartup/custom_startup.sh --go --url \"$KASM_URL\"'"
+    },
+    "assign": {
+      "cmd": "bash -c '/dockerstartup/custom_startup.sh --assign --url \"$KASM_URL\"'"
+    }
+  },
+  "categories": [
+    "Desktop"
+  ],
+  "friendly_name": "ubuntu-desktop-custom",
+  "architecture": [
+    "amd64",
+    "arm64"
+  ],
+  "compatibility": [
+    {
+      "version": "1.17.x",
+      "image": "docker pull ghcr.io/kwianeck/kasm-custom/ubuntu-desktop-custom:1.0.0",
+      "uncompressed_size_mb": 1304,
+      "available_tags": [
+        "1.0.0",
+        "develop",
+        "prod"
+      ]
+    }
+  ]
+}
