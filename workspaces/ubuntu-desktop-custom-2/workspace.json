@@ -1,0 +1,37 @@
+{
+  "description": "Custom Ubuntu Noble Deskop - new 2",
+  "docker_registry": "https://ghcr.io/",
+  "image_src": "ubuntu.png",
+  "run_config": {
+    "hostname": "kasm"
+  },
+  "exec_config": {
+    "go": {
+      "cmd": "bash -c '/dockerstartup/custom_startup.sh --go --url \"$KASM_URL\"'"
+    },
+    "assign": {
+      "cmd": "bash -c '/dockerstartup/custom_startup.sh --assign --url \"$KASM_URL\"'"
+    }
+  },
+  "categories": [
+    "Desktop"
+  ],
+  "friendly_name": "ubuntu-desktop-custom-2",
+  "architecture": [
+    "amd64",
+    "arm64"
+  ],
+  "compatibility": [
+    {
+      "version": "1.17.x",
+      "image": "ghcr.io/pl-byd-bifrost/access_vdi/workspaces/ubuntu-desktop-kasm-atos:1.0.2",
+      "uncompressed_size_mb": 3200,
+      "available_tags": [
+        "1.0.2",
+        "1.0.0",
+        "develop",
+        "prod"
+      ]
+    }
+  ]
+}
